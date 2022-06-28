@@ -19,7 +19,7 @@ function FooterMenu() {
             </span>
             <span className={style.text}>Bag</span>
           </Link>
-          <Link to="/order-details" className={style.link}>
+          <Link to="/my-order" className={style.link}>
             <span>
               <FaFileAlt />
             </span>

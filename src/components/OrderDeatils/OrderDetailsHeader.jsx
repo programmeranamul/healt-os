@@ -1,6 +1,4 @@
-
-
-function OrderDetailsHeader() {
+function OrderDetailsHeader({ orders }) {
   return (
     <section className="border border-top-0 border-left-0 border-right-0">
       <article className="container">
@@ -11,7 +9,7 @@ function OrderDetailsHeader() {
               <b>Order ID</b>
             </p>
             <p>
-              <b>53415</b>
+              <b>{orders?._id}</b>
             </p>
           </div>
           <div className="d-flex align-items-center justify-content-between">
@@ -19,7 +17,16 @@ function OrderDetailsHeader() {
               <b>Order To</b>
             </p>
             <p>
-              <b>HealthOS</b>
+              <b>{orders?.user?.pharmacyName}</b>
+            </p>
+          </div>
+          <div className="d-flex align-items-center justify-content-between">
+            <p>
+              <b>Total</b>
+            </p>
+            <p>
+              {/* <b>{new Date(orders?.date)}</b> */}
+              <b>{orders?.cartTotal}</b>
             </p>
           </div>
           <div className="d-flex align-items-center justify-content-between">
@@ -27,7 +34,8 @@ function OrderDetailsHeader() {
               <b>Date</b>
             </p>
             <p>
-              <b>22-09-2002</b>
+              {/* <b>{new Date(orders?.date)}</b> */}
+              904568
             </p>
           </div>
         </div>

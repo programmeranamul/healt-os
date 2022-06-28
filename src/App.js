@@ -17,9 +17,11 @@ import Company from "./pages/Company";
 import ProductPage from "./pages/ProductPage";
 import CreateProductPage from "./pages/CreateProductPage";
 
-
 import { useEffect } from "react";
-import MyOrder from './pages/MyOrder';
+import MyOrder from "./pages/MyOrder";
+import Orders from "./pages/Orders";
+import AdminOrders from './pages/AdminOrders';
+import AdminOrderDetails from './pages/AdminOrderDetails';
 
 function App() {
   useEffect(() => {
@@ -30,9 +32,8 @@ function App() {
   }, []);
   return (
     <>
-      {/* <AdminNavBar /> */}
+   
       <main>
-      
         <Routes>
           <Route path="/sing-up" element={<SignupPage />} />
           <Route path="/sing-in" element={<SignInPage />} />
@@ -42,17 +43,18 @@ function App() {
             <Route path="cart" element={<CartPage />} />
             <Route path="profile" element={<Profile />} />
             <Route path="notification" element={<NotificationPage />} />
-            <Route path="order-details" element={<OrderDetails />} />
+            <Route path="order-details/:id" element={<OrderDetails />} />
             <Route path="my-order" element={<MyOrder />} />
             <Route element={<AdminOutlet />}>
               <Route path="users" element={<AllUser />} />
               <Route path="company" element={<Company />} />
               <Route path="product" element={<ProductPage />} />
               <Route path="add-product" element={<CreateProductPage />} />
+              <Route path="admin/orders" element={<AdminOrders />} />
+              <Route path="admin/orders/:id" element={<AdminOrderDetails />} />
             </Route>
           </Route>
         </Routes>
-      
       </main>
       <FooterMenu />
       <ToastContainer />

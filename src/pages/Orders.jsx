@@ -1,36 +1,37 @@
-import style from "../styles/MyOrder/MyOrder.module.css";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { API } from "../data/BackEndData";
-import { toast } from "react-toastify";
-import { Link } from "react-router-dom";
+import React, {useState, useEffect} from 'react'
+import axios from "axios"
+import { API } from './../data/BackEndData';
+import { toast  } from "react-toastify";
+import style from "../styles/MyOrder/MyOrder.module.css"
+import {Link } from "react-router-dom"
 
-function MyOrder() {
-  const [loading, setLoading] = useState(false);
-  const [orders, setOrders] = useState([]);
 
-  const token = JSON.parse(localStorage.getItem("token"));
 
-  const fetchOrder = async () => {
-    setLoading(true);
-    try {
-      const res = await axios.get(API + "/v1/order", {
-        headers: { Authorization: `bearer ${token}` },
-      });
-      console.log(res?.data);
-      setOrders(res?.data);
-      setLoading(false);
-    } catch (e) {
-      console.log(e);
-      toast.error(e.response.data.error || "Relaod this web page.");
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchOrder();
-  }, []);
-
+function Orders() {
+    const [loading, setLoading] = useState(false);
+    const [orders, setOrders] = useState([]);
+  
+    const token = JSON.parse(localStorage.getItem("token"));
+  
+    const fetchOrder = async () => {
+      setLoading(true);
+      try {
+        const res = await axios.get(API + "/v1/orders", {
+          headers: { Authorization: `bearer ${token}` },
+        });
+        console.log(res?.data);
+        setOrders(res?.data);
+        setLoading(false);
+      } catch (e) {
+        console.log(e.response.data);
+        toast.error(e.response.data.error || "Relaod this web page.");
+        setLoading(false);
+      }
+    };
+  
+    useEffect(() => {
+      fetchOrder();
+    }, []);
   return (
     <section className="mt-5">
       <article className="container">
@@ -39,7 +40,7 @@ function MyOrder() {
         </h5>
         <div>
           {orders.map((data) => (
-            <Link to={`/order-details/${data?._id}`} key={data?._id} className={style.my_link}>
+            <Link to="/" key={data?._id} className={style.my_link}>
               <div className="card mb-3">
                 <div className="d-flex px-3 pt-3 pb-2 justify-content-between">
                   <div>
@@ -69,7 +70,7 @@ function MyOrder() {
         </div>
       </article>
     </section>
-  );
+  )
 }
 
-export default MyOrder;
+export default Orders

@@ -11,7 +11,7 @@ function AdminMenu() {
         <hr />
         <div className={style.wrapper}>
           <Link to="/users">Users</Link>
-          <Link to="/">Orders</Link>
+          <Link to="/admin/orders">Orders</Link>
           <Link to="/product">Products</Link>
           <Link to="/company">Company</Link>
         </div>

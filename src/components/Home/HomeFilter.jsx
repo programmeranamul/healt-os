@@ -5,8 +5,15 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import { API } from "./../../data/BackEndData";
 
-function HomeFilter({ showFilter, setShowFilter }) {
+function HomeFilter({
+  showFilter,
+  setShowFilter,
+  copyProducts,
+  products,
+  setProducts,
+}) {
   const [comanys, setComapnys] = useState([]);
+  const [cloneCompany, setCloneComapnys] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [loading, setLoading] = useState(false);
   const token = JSON.parse(localStorage.getItem("token"));
@@ -18,6 +25,7 @@ function HomeFilter({ showFilter, setShowFilter }) {
         headers: { Authorization: `bearer ${token}` },
       });
       setComapnys(res?.data?.company);
+      setCloneComapnys(res?.data?.company);
       setLoading(false);
     } catch (e) {
       setLoading(false);
@@ -29,9 +37,30 @@ function HomeFilter({ showFilter, setShowFilter }) {
     getComapny();
   }, []);
 
-  // if(searchText){
+  const handelCompanySearch = (e) => {
+    const query = e.target.value.trimStart();
+    if (query) {
+      console.log(query);
+      const mCompany = comanys.filter((el) =>
+        el.name.toLowerCase().includes(query.toLowerCase())
+      );
+      setComapnys(mCompany);
+    } else {
+      setComapnys(cloneCompany);
+    }
+  };
 
-  // }
+  const handelChecked = (e) => {
+    console.log(e.target.value);
+    const val = e.target.value;
+    if (val) {
+      const mProduct = copyProducts.filter((el) => el.companyName === val);
+      setProducts(mProduct);
+    } else {
+      setProducts(copyProducts);
+    }
+    setShowFilter(false);
+  };
 
   return (
     <div className={`${showFilter ? style.show : ""} ${style.section}`}>
@@ -51,10 +80,26 @@ function HomeFilter({ showFilter, setShowFilter }) {
               <b>Company</b>
             </p>
             <div className={style.input_box}>
-              <input type="text" placeholder="Search Company" />
+              <input
+                type="text"
+                placeholder="Search Company"
+                onChange={(e) => handelCompanySearch(e)}
+              />
             </div>
           </div>
           <div>
+            <div className={`form-check ${style.my_check}`}>
+              <label className="form-check-label" htmlFor="re">
+                <b>Clear Select </b>
+              </label>
+              <input
+                className="form-check-input"
+                type="checkbox"
+                value={""}
+                id={"re"}
+                onChange={(e) => handelChecked(e)}
+              />
+            </div>
             {comanys?.map((data, index) => (
               <div key={data?._id} className={`form-check ${style.my_check}`}>
                 <label className="form-check-label" htmlFor={data}>
@@ -63,8 +108,9 @@ function HomeFilter({ showFilter, setShowFilter }) {
                 <input
                   className="form-check-input"
                   type="checkbox"
-                  value=""
+                  value={data?.name}
                   id={data}
+                  onChange={(e) => handelChecked(e)}
                 />
               </div>
             ))}

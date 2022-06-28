@@ -4,11 +4,11 @@ import { orderData } from "./../../data/OrderPageData";
 import style from "../../styles/orderdetails/OrderDetailsCard.module.css";
 import SingleOrderCart from "./SingleOrderCart";
 
-function OrderCard() {
+function OrderCard({orders}) {
   return (
     <section className={style.section}>
       <div className="container">
-        {orderData.products.map((data, index) => (
+        {orders?.items?.map((data) => (
           <div key={data._id}>
             <SingleOrderCart data={data} />
           </div>

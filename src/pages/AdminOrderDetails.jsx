@@ -8,7 +8,7 @@ import { Link, useParams } from "react-router-dom";
 import React, { useRef } from "react";
 import ReactToPrint from "react-to-print";
 
-function OrderDetails() {
+function AdminOrderDetails() {
   const [loading, setLoading] = useState(false);
   const [orders, setOrders] = useState([]);
   let { id } = useParams();
@@ -50,8 +50,8 @@ function OrderDetails() {
       </div>
       <div ref={componentRef}>
         <OrderDetailsHeader orders={orders} />
-        <OrderCard orders={orders}/>
-        {/* {orders?.items?.length > 0 ? (
+       
+        {orders?.items?.length > 0 ? (
           <div className="container">
             <table className="table table-bordered">
               <thead>
@@ -86,16 +86,15 @@ function OrderDetails() {
             </table>
           </div>
         ) : (
-          <div className="container mt-4">
-            {" "}
+          <div className="container mt-4">           
             <div className="alert alert-primary" role="alert">
               No order Found!
             </div>
           </div>
-        )} */}
+        )}
       </div>
     </>
   );
 }
 
-export default OrderDetails;
+export default AdminOrderDetails;
