@@ -1,0 +1,15 @@
+
+.section{
+
+}
+
+.section_wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.right{
+    display: flex;
+    gap: 20px;
+}
