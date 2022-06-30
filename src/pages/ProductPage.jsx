@@ -3,6 +3,7 @@ import axios from "axios";
 import { API } from "./../data/BackEndData";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import {Link} from "react-router-dom"
 
 function ProductPage() {
   const [products, setProducts] = useState([]);
@@ -82,9 +83,9 @@ function ProductPage() {
 
                           {
                             <td className={"my-row"}>
-                              <button className="btn btn-sm btn-danger">
-                                Remove
-                              </button>
+                              <Link to={`/admin/product/${data?._id}`} className="btn btn-sm btn-danger">
+                                Update
+                              </Link>                             
                             </td>
                           }
                         </tr>

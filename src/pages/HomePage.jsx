@@ -33,6 +33,10 @@ function HomePage() {
     getProduct();
   }, []);
 
+  const handelSort = () => {
+    setProducts((pre) => pre.reverse());
+  };
+
   return (
     <>
       <HomePageHeader
@@ -40,6 +44,8 @@ function HomePage() {
         setShowFilter={setShowFilter}
         products={products}
         setProducts={setProducts}
+        copyProducts={copyProducts}
+        handelSort={handelSort}
       />
       <HomePageCards products={products} loading={loading} />
       <div className="container">

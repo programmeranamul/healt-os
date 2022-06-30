@@ -50,7 +50,7 @@ function AdminOrderDetails() {
       </div>
       <div ref={componentRef}>
         <OrderDetailsHeader orders={orders} />
-       
+
         {orders?.items?.length > 0 ? (
           <div className="container">
             <table className="table table-bordered">
@@ -69,14 +69,16 @@ function AdminOrderDetails() {
                 {orders?.items?.map((data, index) => (
                   <tr key={data?._id}>
                     <td>{index + 1}</td>
-                    <td>{data?.title}</td>
-                    <td>{data?.quantity}</td>
-                    <td>{data?.mainPrice}</td>
-                    <td>{data?.quantity * data?.mainPrice}</td>
-                    <td>
+                    <td className="my-row">{data?.title}</td>
+                    <td className="my-row">{data?.quantity}</td>
+                    <td className="my-row">{data?.mainPrice}</td>
+                    <td className="my-row">
+                      {data?.quantity * data?.mainPrice}
+                    </td>
+                    <td className="my-row">
                       {(data.quantity * data.mainPrice * data.discount) / 100}
                     </td>
-                    <td>
+                    <td className="my-row">
                       {data.quantity * data.mainPrice -
                         (data.quantity * data.mainPrice * data.discount) / 100}
                     </td>
@@ -86,7 +88,7 @@ function AdminOrderDetails() {
             </table>
           </div>
         ) : (
-          <div className="container mt-4">           
+          <div className="container mt-4">
             <div className="alert alert-primary" role="alert">
               No order Found!
             </div>

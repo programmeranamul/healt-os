@@ -1,37 +1,61 @@
-import {
-  FaSearch,
-  FaSortAlphaDown,
-  FaSortAlphaUpAlt,
-  FaBriefcaseMedical,
-} from "react-icons/fa";
-import style from "../../styles/home/home_page_header.module.css"
-import logo from  "../../image/pump-oil.png";
+import { FaSearch, FaSortAlphaDown, FaBriefcaseMedical } from "react-icons/fa";
+import style from "../../styles/home/home_page_header.module.css";
+import { useState, useEffect } from "react";
+import logo from "../../image/logo.jpeg"
 
-function HomePageHeader({showFilter, setShowFilter, products, setProducts}) {
+function HomePageHeader({
+  showFilter,
+  setShowFilter,
+  products,
+  setProducts,
+  copyProducts,
+}) {
+  const [mList, setMLits] = useState([]);
 
-  const handelSort = () => {
-    console.log(products);
-    const mySort = products.reverse()
-    
-    console.log(mySort);
-    setProducts(mySort)
+  useEffect(() => {
+    setMLits(products);
+  }, [products]);
 
-  }
+  const haldelSearc = (e) => {
+    const query = e.target.value.trimStart();
+    if (query) {
+      const mProduct = copyProducts.filter((el) =>
+        el.title.toLowerCase().includes(query.toLowerCase())
+      );
+      setProducts(mProduct);
+    } else {
+      setProducts(copyProducts);
+    }
+  };
+
+  const mSort = () => {
+    const sortList = mList.reverse();
+    setProducts(sortList);
+  };
   return (
     <section className={style.section}>
       <article className="container">
         <div className={style.section_wrapper}>
-          <div className="logo">logo
-          </div>
+          <div className="logo"><img className={style.logo} src={logo} alt=""/></div>
           <div className={style.right}>
             <div>
-              <FaSearch />
+              <div class="input-group">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Search Here"
+                  onChange={(e) => haldelSearc(e)}
+                />
+                <span class="input-group-text" id="basic-addon2">
+                  <FaSearch />
+                </span>
+              </div>
             </div>
+            {/* <div>
+              <FaSortAlphaDown onClick={() => mSort()} />
+            </div> */}
             <div>
-              <FaSortAlphaDown onClick={() => handelSort()}/>
-            </div>
-            <div>
-              <FaBriefcaseMedical onClick={() =>setShowFilter(!showFilter) }/>
+              <FaBriefcaseMedical onClick={() => setShowFilter(!showFilter)} />
             </div>
           </div>
         </div>

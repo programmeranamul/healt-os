@@ -3,8 +3,6 @@ import style from "../../styles/home/home_page_card.module.css";
 import ProductsCard from "./ProductsCard";
 
 
-import { productData } from "../../data/HomePageData";
-
 const HomePageCards = ({ products, loading }) => {
   const [cart, setCart] = useState([]);
 
@@ -25,10 +23,10 @@ const HomePageCards = ({ products, loading }) => {
             </div>
           </div>
         ) : (
-          products.map((product) => (
+          products.map((product, index) => (
             <ProductsCard
               product={product}
-              key={product?._id}
+              key={index}
               handleClick={handleClick}
             />
           ))

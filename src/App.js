@@ -1,7 +1,7 @@
 import "./App.css";
 import SignInPage from "./pages/SignInPage";
 import SignupPage from "./pages/SignupPage";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route ,useLocation } from "react-router-dom";
 import NotificationPage from "./pages/NotificationPage";
 import HomePage from "./pages/HomePage";
 import OrderDetails from "./pages/OrderDetails";
@@ -17,11 +17,12 @@ import Company from "./pages/Company";
 import ProductPage from "./pages/ProductPage";
 import CreateProductPage from "./pages/CreateProductPage";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import MyOrder from "./pages/MyOrder";
 import Orders from "./pages/Orders";
 import AdminOrders from './pages/AdminOrders';
 import AdminOrderDetails from './pages/AdminOrderDetails';
+import ProductEditPage from './pages/ProductEditPage';
 
 function App() {
   useEffect(() => {
@@ -30,6 +31,21 @@ function App() {
       return localStorage.setItem("cart", JSON.stringify([]));
     }
   }, []);
+
+
+  const [user, setUser] = useState("");
+  const [token, setToken] = useState("");
+
+  console.log(user, token);
+  const location = useLocation();
+
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("token"));
+    const user = JSON.parse(localStorage.getItem("user"));
+   
+    setToken(token);
+    setUser(user);
+  }, [location]);
   return (
     <>
    
@@ -52,11 +68,12 @@ function App() {
               <Route path="add-product" element={<CreateProductPage />} />
               <Route path="admin/orders" element={<AdminOrders />} />
               <Route path="admin/orders/:id" element={<AdminOrderDetails />} />
+              <Route path="admin/product/:id" element={<ProductEditPage />} />
             </Route>
           </Route>
         </Routes>
       </main>
-      <FooterMenu />
+     {token&& <FooterMenu />}
       <ToastContainer />
     </>
   );

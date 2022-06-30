@@ -9,6 +9,7 @@ function Company() {
     register,
     formState: { errors },
     handleSubmit,
+    reset
   } = useForm();
 
   const [comanys, setComapnys] = useState([]);
@@ -21,8 +22,9 @@ function Company() {
       const res = await axios.get(API + "/v1/company", {
         headers: { Authorization: `bearer ${token}` },
       });
-      setComapnys(res?.data?.company);
+      setComapnys(res?.data?.company);      
       setLoading(false);
+      reset()
     } catch (e) {
       setLoading(false);
       toast.error(e.response.data.error || "Reload and Try Again!");

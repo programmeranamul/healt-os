@@ -2,7 +2,10 @@
 .section{
 
 }
-
+.logo{
+    height: 55px;
+    width: 85px;
+}
 .section_wrapper{
     display: flex;
     align-items: center;
